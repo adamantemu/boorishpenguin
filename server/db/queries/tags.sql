@@ -1,0 +1,1 @@
+INSERT INTO `Tags` (`name`) VALUES ('Homework'),('Lecture'),('General');
