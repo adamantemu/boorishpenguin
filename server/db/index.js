@@ -89,6 +89,11 @@ var Like = db.define('Like', {
     timestamps: false
 });
 
+
+var Follows = db.define('Follows', {
+
+})
+
 Course.belongsToMany(User, {
   through: 'CourseUser'
 });
@@ -107,6 +112,15 @@ Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
 Post.belongsToMany(User, {as: 'Vote', through: 'Like'});
 User.belongsToMany(Post, {through: 'Like'});
 
+//User.belongsToMany(User, {as: 'follower', through: 'Follow'});
+//User.hasMany(User, {foreignKey: 'follower', joinTableName: 'userFollow'} );
+// User.hasMany(User, {as: 'Follows', joinTableName: 'userFollow'} );
+
+
+//User.belongsToMany(User, {as: 'followed', through: 'Follows'});
+User.belongsToMany(User, {as: 'follower', through: 'Follows'});
+
+
 User.sync()
 .then(function() {
   return Tag.sync();
@@ -119,6 +133,9 @@ User.sync()
 })
 .then(function() {
   return Like.sync();
+})
+.then(function() {
+  return Follows.sync();
 });
 
 exports.User = User;
