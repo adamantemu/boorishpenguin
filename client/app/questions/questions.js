@@ -9,13 +9,13 @@ angular.module('boorish.questions', [])
     Questions.getAllQuestions().then(function(data) {
       $scope.questions = data.results;
     });
-    
+
   };
 
 
   // if user is not authenticated, reroute to /signin
   if (!Auth.isAuth()) {
-    $location.path('/signin') 
+    $location.path('/signin')
   // else show questions
   } else {
     $scope.init();
