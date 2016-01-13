@@ -12,19 +12,19 @@ angular.module('boorish.answers', [])
   /////   IMPORTANT: The question will always be the first item in the results array.
   /////
   /////   addAnswer. Pulls the id of the current user with the getUserWithID factory method and add answer with the addAnswer factory methdod
-  /////   
-  /////   updateAnswer. There are two modifications that a user can make on an answer. 
+  /////
+  /////   updateAnswer. There are two modifications that a user can make on an answer.
   /////       1. 'like': Any user can like an answer.
   /////       2. 'good': Only a teacer can mark a question as 'good'.
-  /////   
+  /////
   /////   updateQuestion. There are four modifications that a user can make on a question:
   /////       1. 'like': Any user can like a question.
   /////       2. 'good': Only a teacher can mark a question as 'good'.
   /////       3. 'answered': Only a teacher and the user who asked the question can mark it as answered.
   /////       4. 'closed': Only a teacher can mark an answer as 'closed,' which prevents other answers to the question.
-  /////   
+  /////
   /////   removeQuestion. A question can only be deleted by a teacher or the user who asked the question. This removes the question and all answers.
-  /////   
+  /////
   /////   removeAnswer. An answer can only be deleted by a teacher or the user who posted the answer. This removes the answer.
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,6 +45,7 @@ angular.module('boorish.answers', [])
         $scope.newAnswer.text = '';
         $scope.getQuestion(); // refreshes the view
       });
+      $scope.newAnswer = {}
     });
   };
 
