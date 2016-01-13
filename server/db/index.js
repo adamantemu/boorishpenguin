@@ -1,11 +1,16 @@
 var Sequelize = require('sequelize');
 
-var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
-var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
-var dbPass = process.env.DBPASS;
-var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+// var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
+// var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
+// var dbPass = process.env.DBPASS;
+// var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 
-var db = new Sequelize(database, dbUser, dbPass, {
+var database = process.env.DATABASE
+var dbUser = process.env.DBUSER
+var dbPass = process.env.DBPASS
+var dbHost = process.env.DBHOST
+
+var db = new Sequelize('penguin', "root", "", {
   host: dbHost
 });
 
