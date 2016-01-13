@@ -5,13 +5,10 @@ var Sequelize = require('sequelize');
 // var dbPass = process.env.DBPASS;
 // var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 
-var database = process.env.DATABASE
-var dbUser = process.env.DBUSER
-var dbPass = process.env.DBPASS
-var dbHost = process.env.DBHOST
 
-var db = new Sequelize('penguin', "root", "", {
-  host: dbHost
+var db = new Sequelize('townhall', 'root', '', {
+  host: 'localhost'
+
 });
 
 var User = db.define('User', {

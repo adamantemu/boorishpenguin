@@ -1,0 +1,1 @@
+INSERT INTO `Courses` (`name`) VALUES ('Physics'),('Chemistry'),('Math'),('Philosophy'),('Computer Science');
