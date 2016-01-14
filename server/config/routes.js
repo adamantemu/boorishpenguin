@@ -3,6 +3,7 @@ var answerControllers = require ('../controllers/answerController.js');
 var userControllers = require ('../controllers/userControllers.js');
 var courseControllers = require ('../controllers/courseControllers.js');
 var tagControllers = require ('../controllers/tagControllers.js');
+var friendsController = require ('../controllers/friendsController.js');
 var passport = require('passport');
 
 
@@ -21,6 +22,10 @@ module.exports = function(app, express, ensureAuth) {
   app.get('/townhall/users', ensureAuth, userControllers.allUsers);
   app.get('/townhall/users/:id', ensureAuth, userControllers.oneUser);
   app.post('/townhall/signup', userControllers.newUser);
+
+  app.get('/townhall/friends', friendsController.allFriendships);
+  app.get('/townhall/friends/:id', friendsController.getFriends);
+  //app.post('/townhall/friends', friendsController.addFriendship);
 
   app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
 

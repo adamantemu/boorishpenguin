@@ -91,8 +91,8 @@ var Like = db.define('Like', {
 
 
 var Follows = db.define('Follows', {
-
-})
+ }, { timestamps: false
+});
 
 Course.belongsToMany(User, {
   through: 'CourseUser'
@@ -142,3 +142,4 @@ exports.User = User;
 exports.Course = Course;
 exports.Tag = Tag;
 exports.Post = Post;
+exports.Follows = Follows;
