@@ -19,7 +19,6 @@ module.exports = {
     var get = "SELECT * FROM users AS follower JOIN follows ON follower.id = follows.followerId JOIN users AS followed ON follows.userId = followed.id;";
     
     connection.query(get, function(err, results){
-      console.log(results);
       res.send(results);
     })
   },
