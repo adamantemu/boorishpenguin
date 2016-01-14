@@ -154,6 +154,7 @@ var createTagJoinTable = "\
   user_id INT NOT NULL, \
   post_id INT NOT NULL, \
   tag_id INT NOT NULL, \
+  type ENUM('student','teacher','machine') NOT NULL, \
   FOREIGN KEY (user_id) REFERENCES Users(id), \
   FOREIGN KEY (post_id) REFERENCES Posts(id), \
   FOREIGN KEY (tag_id) REFERENCES Tags(id) );";
