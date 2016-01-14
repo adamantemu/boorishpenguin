@@ -29,7 +29,12 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
 
-  app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
+  app.get('/townhall/tags', tagControllers.allTags);
+  app.get('/townhall/themes/tags/:id', tagControllers.getQuestionsForTag);
+  // app.get('/townhall/tags/:id', ensureAuth, tagControllers.getTagsForPost);
+  // app.post('/townhall/tags', tagControllers.makeNewTagForPost);
+  // app.get('/townhall/questions/tag/:id', tagControllers.getAllPostsForTag)
+
 
   // Client does get request to /auth/google on signin
   app.get('/auth/google',

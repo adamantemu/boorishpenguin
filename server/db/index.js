@@ -4,6 +4,16 @@ var Sequelize = require('sequelize');
 // var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
 // var dbPass = process.env.DBPASS;
 // var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+var mysql = require('mysql');
+
+
+var connection = mysql.createConnection({
+  user: "root",
+  password: "",
+  database: "townhall"
+});
+
+connection.connect();
 
 
 var db = new Sequelize('townhall', 'root', '', {
@@ -137,6 +147,39 @@ User.sync()
 .then(function() {
   return Follows.sync();
 });
+
+// create merge table for tags
+var createTagJoinTable = "\
+  CREATE TABLE IF NOT EXISTS user_question_tag (\
+  user_id INT NOT NULL, \
+  post_id INT NOT NULL, \
+  tag_id INT NOT NULL, \
+  FOREIGN KEY (user_id) REFERENCES Users(id), \
+  FOREIGN KEY (post_id) REFERENCES Posts(id), \
+  FOREIGN KEY (tag_id) REFERENCES Tags(id) );";
+connection.query(createTagJoinTable, function(err, results){
+  console.log('created new table! :', results)
+});
+
+var createThemeTable = "\
+  CREATE TABLE IF NOT EXISTS themes (\
+  theme_id INT NOT NULL AUTO_INCREMENT, \
+  title varchar(40) NOT NULL, \
+  PRIMARY KEY (theme_id) );";
+connection.query(createThemeTable, function(err, results){
+  console.log('created new theme table! :', results);
+});
+
+var createTagThemeJoinTable = "\
+  CREATE TABLE IF NOT EXISTS tag_theme (\
+  theme_id INT NOT NULL, \
+  tag_id INT NOT NULL, \
+  FOREIGN KEY (theme_id) REFERENCES Themes(theme_id), \
+  FOREIGN KEY (tag_id) REFERENCES Tags(id) );";
+connection.query(createTagThemeJoinTable, function(err, results){
+  console.log('created new tag_theme table! :', results)
+});
+
 
 exports.User = User;
 exports.Course = Course;

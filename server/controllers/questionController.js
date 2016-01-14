@@ -25,6 +25,7 @@ module.exports = {
           coursename: question.Course.name,
           tagname: question.Tag.name,
           user: question.User.name,
+          userId: question.User.id,
           imgUrl: question.User.picture,
           updatedAt: question.updatedAt
         }
