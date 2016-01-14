@@ -25,7 +25,7 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/townhall/friends', friendsController.allFriendships);
   app.get('/townhall/friends/:id', friendsController.getFriends);
-  //app.post('/townhall/friends', friendsController.addFriendship);
+  app.post('/townhall/friends', friendsController.addFriendship);
 
   app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
 
