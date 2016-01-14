@@ -1,35 +1,49 @@
-var db = require('../db/index.js');
+// var db = require('../db/index.js');
+
+var mysql = require('mysql');
+
+
+var connection = mysql.createConnection({
+  user: "root",
+  password: "",
+  database: "townhall"
+});
+
+connection.connect();
+
+
+//var Sequelize = require('sequelize'); //FUCK SEQUELIZE
 
 module.exports = {
   allFriendships: function(req, res) {
-    db.Follows.findAll()
-    .then(function(relationships){
-      console.log(relationships);
-
-      var formattedRelationships = relationships.map(function(rel) {
-        return {
-          id: rel.id,
-          name: rel.name
-        };
-      });
-
-      rels = {};
-      rels.results = formattedRelationships;
-      res.json()
-    });
+    var get = "SELECT * FROM users AS follower JOIN follows ON follower.id = follows.followerId JOIN users AS followed ON follows.userId = followed.id;";
+    
+    connection.query(get, function(err, results){
+      console.log(results);
+      res.send(results);
+    })
   },
 
 getFriends: function(req, res){
   var fid = req.params.id;
 
-  db.Follows.findAll(
-    {
-      where: {followerId: fid},
-      include: [{model: db.User, as: 'follower'}]
-    })
-  .then(function(relations){
+  var get = "SELECT * FROM users AS follower JOIN follows ON follower.id = follows.followerId JOIN users AS followed ON follows.userId = followed.id WHERE follower.id = ?;";
 
-    res.json(relations);
+  connection.query(get, [fid], function(err, results){
+    console.log(results);
+    res.send(results);
+  })
+},
+
+addFriendship: function(req, res){
+  var follower = req.body.follower;
+  var followed = req.body.followed;
+
+  var makeNew = "insert into follows (UserId, followerId) Values (?, ?);";
+
+  connection.query(makeNew, [followed, follower], function(err, result){
+    console.log(result);
+    res.json(result);
   })
 }
 
