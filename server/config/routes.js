@@ -31,8 +31,8 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/townhall/tags', tagControllers.allTags);
   // app.get('/townhall/themes/tags/:id', tagControllers.getQuestionsForTag);
-  // app.get('/townhall/tags/:id', ensureAuth, tagControllers.getTagsForPost);
-  // app.post('/townhall/tags', tagControllers.makeNewTagForPost);
+  app.get('/townhall/tags/:id', ensureAuth, tagControllers.getTagsForPost);
+  app.post('/townhall/tags', tagControllers.makeNewTagForPost);
   // app.get('/townhall/questions/tag/:id', tagControllers.getAllPostsForTag)
 
 
